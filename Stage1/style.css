@@ -7,7 +7,7 @@
     color: #D0F0FF;
 }
 body {
-    background-image: url(/assets/images/bg-body.png);
+    background-image: url(./assets/images/bg-body.png);
     background-size: cover;
     backdrop-filter: blur(2.5px);
 }
@@ -48,7 +48,7 @@ body {
     color: red;
 }
 li {
-    list-style-image: url(/assets/images/image-for-li.png);
+    list-style-image: url(./assets/images/image-for-li.png);
 }
 .contacts-links {
     display: flex;
