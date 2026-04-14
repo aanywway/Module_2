@@ -42,7 +42,7 @@ body {
     transform: translate(-10%, -10%);
     transition: all 0.5s ease;
 }
-.card-container:active {
+.card-clicked {
     transform: rotate(-20deg) skew(10deg) scale(1.2);
     transition: all 0.5s ease;
 }
