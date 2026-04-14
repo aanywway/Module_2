@@ -1,0 +1,78 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form {
+    width: 1000px;
+    height: auto;
+    display: flex;
+    flex-flow: column;
+}
+fieldset {
+    border-radius: 20px;
+    background-color: white;
+    
+}
+legend {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+
+}
+input {
+    margin: 5px 15px;
+    padding: 15px 20px;;
+    width: 50%;
+    display: block;
+    border-radius: 10px;
+    border: 1px solid #EBEBE4;
+    caret-color: #FF8912;
+}
+input:focus{
+    outline: 2px solid #FF8912;
+    filter: drop-shadow(0 0 0.45rem #E77C11);
+}
+#inactive:hover {
+    cursor: no-drop;    
+}
+textarea {
+    resize: horizontal;
+}
+#react, #angular, #apple, #windows, #linux {
+    width: 20px;
+    display: inline;
+}
+#react:focus, #angular:focus, #apple:focus, #windows:focus, #linux:focus {
+    outline: none;
+    filter: none;
+}
+#inactive {
+    background-color: #D9544D;
+    border: 1px solid red;
+}
+#submit {
+    background-color: #FF932C;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+}
+#progLang {
+    width: 70px;
+    height: auto;
+    border: 2px solid #FF8912;
+}
+input {
+    margin: 15px 0px;
+}
+label {
+    font-weight: bold;
+}
+#submit:hover {
+    outline: 2px solid #FF8912;
+    filter: drop-shadow(0 0 0.45rem #E77C11);
+}
