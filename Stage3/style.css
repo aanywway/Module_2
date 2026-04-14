@@ -1,0 +1,92 @@
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: white;
+}
+body {
+    margin: 0;
+    padding: 0;    
+}
+header {
+    background-color: #19181A;
+    padding: 0px 24px;
+}
+.nav-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav-container__logo-container {
+    display: flex;
+}
+.logo-container__logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.logo-link__text {
+    margin: 15px 0px 15px 6px;
+}
+.nav-container__links-avatar-container {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+.nav-container__links-container {
+    display: flex;
+}
+.links-container__links {
+    padding: 0;
+    display: flex;
+    gap: 25px;
+}
+li > a {
+    padding: 6px;
+    font-size: 16px;
+    text-decoration: none;
+}
+li > a:hover {
+    text-underline-offset: 6px;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #FF8B16;
+}
+li {
+    list-style-type: none;
+}
+a > img {
+    width: 30px;
+    height: 30px;
+}
+.burger-menu-checkbox {
+    display: none;
+}
+.burger-menu-icon {
+    font-size: 16px;
+    cursor: pointer;
+    display: none;
+}
+@media (max-width: 810px) {
+    .nav-container__links-container {
+        display: none;
+    }
+    .burger-menu-icon {
+        display: block;
+    }
+    .burger-menu-checkbox:checked + .burger-menu-icon + .nav-container__links-container {
+        display: block;
+        position: absolute;
+        left: 0px;
+        top: 51px;
+    }
+    .links-container__links {
+        margin: 0px;
+        width: 100vw;
+        height: 100vw;
+        background-color: #19181A;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
