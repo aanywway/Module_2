@@ -23,8 +23,8 @@
         <label for="phone">Phone Number</label>
         <input type="tel" pattern="\+375\s?\d{2}\s?\d{3}\s?\d{2}\s?\d{2}" placeholder="+375777777777" id="phone" name="Phone Number" required>
 
-        <label for="progLang">Choose a programming language</label>
-        <select name="Programming Language" id="progLang" required> 
+        <label for="programming-language">Choose a programming language</label>
+        <select name="Programming Language" id="programming-language" required> 
           <option value="html">HTML</option>
           <option value="css">CSS</option>
           <option value="js">JS</option>
@@ -33,11 +33,11 @@
         <label for="randomNumbers"></label>
         <input type="text" id="randomNumbers" value="42" pattern="\d{2}" maxlength="2" name="Random Number" required>
 
-        <input type="radio" id="react" name="fav_library" value="React" required>
-        <label for="react">React</label><br>
+        <input type="radio" id="favorite-library-react" name="favorite-library" value="React" class="tech-item" required>
+        <label for="favorite-library-react">React</label><br>
 
-        <input type="radio" id="angular" name="fav_library" value="Angular" required>
-        <label for="angular">Angular</label><br>
+        <input type="radio" id="favorite-library-angular" name="favorite-library" value="Angular"  class="tech-item" required>
+        <label for="favorite-library-angular">Angular</label><br>
 
         <p><label for="review">Напишите впечатления о языке программирования</label></p>
         <textarea id="review" name="review" rows="3" cols="30" placeholder="-Сколько будет яблоко + одно? - Одно яблоко - Твой родной язык JavaScript что-ли?" name="Review" required></textarea><br>
@@ -48,13 +48,13 @@
         <label for="inactive">Inactive</label>
         <input type="text" id="inactive" disabled>
 
-        <input type="checkbox" id="apple" name="apple" value="apple">
+        <input type="checkbox" id="apple" name="apple" value="apple" class="tech-item">
         <label for="apple">Apple</label><br>
 
-        <input type="checkbox" id="windows" name="windows" value="windows">
+        <input type="checkbox" id="windows" name="windows" value="windows" class="tech-item">
         <label for="windows">Windows</label><br>
 
-        <input type="checkbox" id="linux" name="linux" value="linux">
+        <input type="checkbox" id="linux" name="linux" value="linux" class="tech-item">
         <label for="linux">Linux</label><br>
 
         <input type="submit" value="Submit" id="submit">
