@@ -4,12 +4,20 @@
 }
 * {
     font-family: 'ChakraPetch-Regular', sans-serif;
-    color: #D0F0FF;
+    box-sizing: border-box;
+    margin: 0;
 }
 body {
     background-image: url(./assets/images/bg-body.png);
     background-size: cover;
     backdrop-filter: blur(2.5px);
+    color: #D0F0FF;
+}
+header {
+    margin: 10px 10px;
+}
+section {
+    margin: 20px 20px;
 }
 .education {
     font-size: 19px;
@@ -22,7 +30,7 @@ body {
     display: flex;
     justify-content: center;
 }
-.thumb-up-link {
+.thumb-up-photo {
     width: 300px;
     height: auto;
     background-color: #FFB02E;
@@ -48,27 +56,24 @@ body {
     color: red;
 }
 li {
-    list-style-image: url(./assets/images/image-for-li.png);
+    list-style-type: none;
+
+    &:before {
+        content: url(./assets/images/image-for-li.png);
+        margin-right: 10px;
+    }
 }
 .contacts-links {
     display: flex;
     justify-content: center;
     gap: 30px;
 }
-.contacts-links__linkedin-icon,
-.contacts-links__reddit-icon,
-.contacts-links__telegram-icon,
-.contacts-links__gmail-icon,
-.contacts-links__phone-icon {
+.contacts-links-icon {
     width: 60px;
     height: auto;
     filter: grayscale(100%);
 }
-.contacts-links__linkedin-icon:hover,
-.contacts-links__reddit-icon:hover,
-.contacts-links__telegram-icon:hover,
-.contacts-links__gmail-icon:hover,
-.contacts-links__phone-icon:hover {
+.contacts-links-icon:hover {
     filter: grayscale(0%);
     transition: 0.5s ease;
 }
