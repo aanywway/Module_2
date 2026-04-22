@@ -1,10 +1,10 @@
 * {
     box-sizing: border-box;
-    color: white;
 }
 body {
     margin: 0;
     padding: 0;
+    color: white;
 }
 .site-container {
     max-width: 1500px;
@@ -33,13 +33,12 @@ body {
     font-size: 0.875rem;
     background-color: #D27B22;
 }
-.site-container__main-div-container {
+.site-container__cards-grid {
     display: grid;
     gap: 10px;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
 }
-.main-div-container__card {
+.cards-grid__card{
     max-height: 200px;
     font-size: 1.125rem;
     border: 1px solid black;
@@ -68,10 +67,10 @@ body {
     .site-container__main-sidebar {
         max-height: 100px;
     }
-    .main-div-container__card {
+    .cards-grid__card {
         font-size: 1rem;
     }
-    .main-div-container__card:nth-last-child(1) {
+    .cards-grid__card:nth-last-child(1) {
         display: none;
     }
 }
@@ -79,13 +78,13 @@ body {
     .site-container__header {
         font-size: 1.25rem;
     }
-    .site-container__main-div-container {
+    .site-container__cards-grid {
         grid-template-columns: 1fr;
     }
-    .main-div-container__card {
+    .cards-grid__card {
         font-size: 0.875rem;
     }
-    .main-div-container__card:nth-last-child(2) {
+    .cards-grid__card:nth-last-child(2) {
         display: none;
     }
 }
