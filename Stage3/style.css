@@ -67,7 +67,7 @@ a > img {
     cursor: pointer;
     display: none;
 }
-@media (max-width: 810px) {
+@media (max-width: 768px) {
     .nav-container__links-container {
         display: none;
     }
