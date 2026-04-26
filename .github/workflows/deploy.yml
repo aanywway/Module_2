@@ -1,41 +1,28 @@
-name: Deploy All Branches
+name: Deploy branch to subfolder
 on:
   push:
-    branches:
-      - '*'
+    branches: ['**']
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    concurrency:
+      group: pages-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Build
+
+      - name: Prepare folder
         run: |
-          mkdir -p public
-          # Создаем папку для текущей ветки
-          target="public/${{ github.ref_name }}"
-          mkdir -p "$target"
-          
-          # Копируем всё содержимое, кроме служебных папок
-          rsync -av --exclude='.git' --exclude='.github' --exclude='public' . "$target/"
-          
-          # Если это main, делаем index.html для корня
-          if [ "${{ github.ref_name }}" == "main" ]; then
-             cp "$target/main.html" public/index.html
-          fi
-          
-          # Агрессивное исправление путей во всех HTML
-          # Заменяет /style.css на style.css, /js/script.js на js/script.js и т.д.
-          find "$target" -type f -name "*.html" -exec sed -i 's|href="/|href="|g' {} +
-          find "$target" -type f -name "*.html" -exec sed -i 's|src="/|src="|g' {} +
-          
-      - uses: actions/upload-pages-artifact@v3
+          mkdir out
+          rsync -av --exclude='.git' --exclude='.github' ./ out/
+
+      - uses: peaceiris/actions-gh-pages@v4
         with:
-          path: 'public'
-      - uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          destination_dir: ${{ github.ref_name }}
+          keep_files: true
