@@ -1,0 +1,46 @@
+name: Deploy All Branches
+
+on:
+  push:
+    branches:
+      - '*' # Срабатывает при push в любую ветку
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Build and Collect
+        run: |
+          mkdir -p public
+          target_dir="public/${{ github.ref_name }}"
+          mkdir -p "$target_dir"
+          
+          rsync -av --exclude='public' . "$target_dir/"
+          
+          rm -rf "$target_dir/.git"
+          rm -rf "$target_dir/.github"
+          
+          find "$target_dir" -name "*.html" -exec sed -i 's|href="/|href="|g' {} +
+          find "$target_dir" -name "*.html" -exec sed -i 's|src="/|src="|g' {} +
+          echo "Deployed ${{ github.ref_name }} to $target_dir"
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'public'
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
