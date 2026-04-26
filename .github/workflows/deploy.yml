@@ -1,7 +1,8 @@
-name: Deploy branch to subfolder
+name: Deploy All Branches
 on:
   push:
     branches: ['**']
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -26,3 +27,4 @@ jobs:
           publish_dir: ./out
           destination_dir: ${{ github.ref_name }}
           keep_files: true
+
