@@ -33,9 +33,11 @@ jobs:
           if [ "${{ github.ref_name }}" == "main" ]; then
              cp main.html public/index.html
           fi
+
+          find public -name "*.html" -type f -exec sed -i 's|href="/|href="|g' {} +
+          find public -name "*.html" -type f -exec sed -i 's|src="/|src="|g' {} +
+          find public -name "*.html" -type f -exec sed -i 's|url(/|url(|g' {} +
           
-          find "$target_dir" -name "*.html" -exec sed -i 's|href="/|href="|g' {} +
-          find "$target_dir" -name "*.html" -exec sed -i 's|src="/|src="|g' {} +
           echo "Deployed ${{ github.ref_name }} to $target_dir"
 
       - name: Upload Artifact
