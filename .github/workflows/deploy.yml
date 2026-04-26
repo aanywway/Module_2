@@ -27,7 +27,8 @@ jobs:
           mkdir -p public
           target_dir="public/${{ github.ref_name }}"
           mkdir -p "$target_dir"
-          cp -r . "$target_dir/"
+          
+          rsync -av --exclude='public' . "$target_dir/"
           
           rm -rf "$target_dir/.git"
           rm -rf "$target_dir/.github"
