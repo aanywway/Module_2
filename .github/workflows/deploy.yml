@@ -1,24 +1,40 @@
-name: Deploy
+name: Deploy All Branches
 on:
   push:
-    branches: ['*']
+    branches:
+      - '*'
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup
+      
+      - name: Build
         run: |
           mkdir -p public
-          # Копируем всё содержимое в корень public
-          # ВАЖНО: мы не создаем папки для веток, а всё льем в корень
-          cp -r * public/
-          # Создаем простейший index.html, если его нет
-          echo "<h1>Привет! Сайт работает.</h1>" > public/index.html
+          # Создаем папку для текущей ветки
+          target="public/${{ github.ref_name }}"
+          mkdir -p "$target"
+          
+          # Копируем всё содержимое, кроме служебных папок
+          rsync -av --exclude='.git' --exclude='.github' --exclude='public' . "$target/"
+          
+          # Если это main, делаем index.html для корня
+          if [ "${{ github.ref_name }}" == "main" ]; then
+             cp "$target/main.html" public/index.html
+          fi
+          
+          # Агрессивное исправление путей во всех HTML
+          # Заменяет /style.css на style.css, /js/script.js на js/script.js и т.д.
+          find "$target" -type f -name "*.html" -exec sed -i 's|href="/|href="|g' {} +
+          find "$target" -type f -name "*.html" -exec sed -i 's|src="/|src="|g' {} +
+          
       - uses: actions/upload-pages-artifact@v3
         with:
           path: 'public'
