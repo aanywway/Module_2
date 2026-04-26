@@ -1,41 +1,29 @@
 name: Deploy All Branches
 on:
   push:
-    branches:
-      - '*'
+    branches: ['**']
+  workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    concurrency:
+      group: pages-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Build
+
+      - name: Prepare folder
         run: |
-          mkdir -p public
+          mkdir out
+          rsync -av --exclude='.git' --exclude='.github' ./ out/
 
-          target="public/${{ github.ref_name }}"
-          mkdir -p "$target"
-          
-
-          rsync -av --exclude='.git' --exclude='.github' --exclude='public' . "$target/"
-          
-
-          if [ "${{ github.ref_name }}" == "main" ]; then
-             cp "$target/main.html" public/index.html
-          fi
-          
-
-
-          find "$target" -type f -name "*.html" -exec sed -i 's|href="/|href="|g' {} +
-          find "$target" -type f -name "*.html" -exec sed -i 's|src="/|src="|g' {} +
-          
-      - uses: actions/upload-pages-artifact@v3
+      - uses: peaceiris/actions-gh-pages@v4
         with:
-          path: 'public'
-      - uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          destination_dir: ${{ github.ref_name }}
+          keep_files: true
