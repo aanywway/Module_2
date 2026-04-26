@@ -25,19 +25,20 @@ jobs:
       - name: Build and Collect
         run: |
           mkdir -p public
-          if [ "${{ github.ref_name }}" == "main" ]; then
-             cp index.html public/
-          fi
-          
           target_dir="public/${{ github.ref_name }}"
           mkdir -p "$target_dir"
           
-          rsync -av --exclude='public' . "$target_dir/"
+          find . -maxdepth 1 -not -name 'public' -not -name '.' -not -name '.git' -not -name '.github' -exec cp -r {} "$target_dir/" \;
           
-          rm -rf "$target_dir/.git" "$target_dir/.github"
+          if [ "${{ github.ref_name }}" == "main" ]; then
+             cp main.html public/index.html
+          fi
+
+          find public -name "*.html" -type f -exec sed -i 's|href="/|href="|g' {} +
+          find public -name "*.html" -type f -exec sed -i 's|src="/|src="|g' {} +
+          find public -name "*.html" -type f -exec sed -i 's|url(/|url(|g' {} +
           
-          find "$target_dir" -name "*.html" -exec sed -i 's|href="/|href="|g' {} +
-          find "$target_dir" -name "*.html" -exec sed -i 's|src="/|src="|g' {} +
+          echo "Deployed ${{ github.ref_name }} to $target_dir"
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
